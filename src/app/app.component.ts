@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "./header.component/header.component.component";
+import { UserComponent } from "./user/user.component";
+import { DUMMY_USERS } from './dummy-users';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent, UserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Project1';
+  users = DUMMY_USERS;
 }
