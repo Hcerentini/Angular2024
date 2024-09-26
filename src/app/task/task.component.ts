@@ -8,6 +8,7 @@ import { TarefaComponent } from "./tarefa/tarefa.component";
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
+
 export class TaskComponent {
   @Input({ required:true }) userId!: string;
   @Input({ required:true }) name!: string;
