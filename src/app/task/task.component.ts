@@ -1,10 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Injectable, Input } from '@angular/core';
 import { TarefaComponent } from "./tarefa/tarefa.component";
+import { NewTaskComponent } from './new-task/new-task.component';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [TarefaComponent],
+  imports: [TarefaComponent, NewTaskComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
@@ -12,31 +14,22 @@ import { TarefaComponent } from "./tarefa/tarefa.component";
 export class TaskComponent {
   @Input({ required:true }) userId!: string;
   @Input({ required:true }) name!: string;
-  tasks = [
-    {
-      id: 't1',
-      userId:'u1',
-      title: 'Master Angular',
-      summary: 'Learn all the basic and advanced features of angular',
-      dueDate: '2025-12-31'
-    },
-    {
-      id: 't2',
-      userId:'u2',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online website',
-      dueDate: '2025-12-31'
-    },
-    {
-      id: 't3',
-      userId:'u3',
-      title: 'Prepare issue template',
-      summary: 'prepare issue template',
-      dueDate: '2025-12-31'
-    },
-  ];
+  isAddingTask = false;
+
+  constructor(private tasksService: TasksService) {}
+
 
   get selectUserTasks() {
-    return this.tasks.filter((task) => task.userId  === this.userId);
+    return this.tasksService.getUserTasks(this.userId);
+  }
+
+  onCompleteTask(id: string) {}
+
+  onStartAddTask() {
+    this.isAddingTask = true;
+  }
+
+  onCloselAddTask() {
+    this.isAddingTask = false;
   }
 }
